@@ -42,7 +42,7 @@
 
 # If CHANGE_TO_STA is set to "yes" the esp-link module will switch to station mode
 # once successfully connected to an access point. Else it will stay in STA+AP mode.
-CHANGE_TO_STA ?= yes
+CHANGE_TO_STA ?= no
 
 # hostname or IP address for wifi flashing
 ESP_HOSTNAME  ?= esp-link
