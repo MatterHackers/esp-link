@@ -528,3 +528,259 @@ pre.console a {
     transform: rotate(359deg);
   }
 }
+
+
+/* 
+
+    MatterHackers Mods
+
+*/
+
+/* default */
+
+h1 {
+  font-size: 1.5em !important;
+  color: #2B3D4F   !important;
+}
+
+div.card {
+  background-color: #F7F9F9 !important;
+}
+
+div.tt {
+  color: #27AF60 !important;
+  padding: 10px 10px 0px !important;
+  background-color: transparent !important;
+}
+
+div tt {
+  color: #27AF60 !important;
+}
+
+pre.console {
+  background-color: #f7f9f9  !important;
+  color: #BF3A2B  !important;
+}
+
+
+p a:visited, p a, table a {
+  color: #2980B9 !important;
+  font-weight: bold !important;
+}
+
+p a:hover {
+  color: #344A5F !important;
+}
+
+.content {
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
+}
+
+.click-to-edit span {
+  background-color: #d7efff !important;
+  color: #3498DB !important;
+  font-weight: bold !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+.click-to-edit span:hover, .click-to-edit div:hover, .click-to-edit span:focus, .click-to-edit div:focus {
+  background-image: none !important;
+}
+
+.popup, div.popup { /* info popovers */
+  background-color: #344A5F !important;
+  border: 1px solid #344A5F !important;
+  color: #fff !important;
+}
+
+/* header */
+
+.header {
+  color: #444  !important;
+  background-color: #f7f9f9  !important;
+  border-bottom-color: rgba(174, 183, 191, 0.65) !important;
+  padding: 60px 0 20px !important;
+}
+
+.header h1 {
+  text-transform: uppercase !important;
+  font-weight: bold !important;
+  letter-spacing: 0.2em  !important;
+  font-size: 1.5em !important;
+  color: #344A5F !important;
+}
+
+.header img {
+    max-width:75px !important;
+    margin:10px 0 15px !important;
+}
+
+.page-home .header {
+    padding: 30px 0 20px !important;
+}
+
+.header h1.mc-title {
+    color:#333 !important;
+    text-transform:none !important;
+    letter-spacing:0 !important;
+    font-size:40px !important;
+    color: #2B3D4F !important;
+}
+
+.header .mc-subtitle {
+    color: #a7a7a7 !important;
+    font-weight:normal !important;
+    font-size:20px !important;
+}
+
+.header .mc-subtitle a {
+    color:#2980B9 !important;
+    font-weight:bold !important;
+}
+
+.header .mc-subtitle a:hover {
+  color: #2B3D4F !important;
+}
+
+/* menu */ 
+
+#menu {
+  background: #2B3D4F !important;
+  transition: all 0.2s ease-out !important;
+}
+
+#menu .pure-menu-selected, #menu .pure-menu-heading {
+  background: transparent !important;
+}
+
+#menu .pure-menu ul, #menu .pure-menu .menu-item-divided {
+  border-top: none !important;
+}
+
+#menu .pure-menu-heading {
+    display:none !important;
+    /* hide text */
+  text-indent: 100% !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+}
+
+#menu .pure-menu-heading.system-name { /* logo */
+    background-image: url(/mh-logo-white.svg) !important;
+    background-size: contain !important;
+    background-position: top center !important;
+    background-repeat: no-repeat !important;
+    background-color: transparent !important;
+    height: 80px !important;
+    margin-bottom: 25px !important;
+    margin-top: 35px !important;
+    display:block !important;
+}
+
+#menu .pure-menu-heading img {
+  display: none !important;
+}
+
+#menu a {
+  color: #AEB7BF !important;
+}
+
+#menu .pure-menu-item {
+  height: auto !important;
+}
+
+#menu .pure-menu li a:hover, #menu .pure-menu li a:focus {
+  background: #2980B9 !important;
+  color: #fff !important;
+}
+
+#menu .pure-menu-selected a {
+  background-color: #2980b9 !important;
+  color: #fff !important;
+}
+
+/* buttons */
+
+#main .button-primary, #main a.button-primary {
+  background-color: #2980b9 !important;
+  color: #fff !important;
+  transition: all 0.2s ease-out !important;	
+}
+
+#main .button-primary:hover, #main a.button-primary:hover {
+  background-color: #344A5F !important;
+}
+
+.pure-button.button-selected, a.pure-button.button-selected {
+  background-color: #27AF60 !important;
+  color: #ABEBC6 !important;
+}
+
+.button-selected a {
+  color: #fff !important;
+}
+
+.pure-button, a.pure-button {
+  border-radius: 5px !important;
+  color: #fff !important;
+  font-weight: normal !important;
+}
+
+.pure-button-hover, .pure-button:hover, .pure-button:focus {
+  background-image: none !important;
+}
+
+.pure-button-active, .pure-button:active {
+  box-shadow: none !important;
+}
+
+select.pure-button {
+  color: #2980B9 !important;
+  background: #fff !important;
+  border: 1px solid #cecece  !important;
+  font-weight: bold !important;
+}
+
+/* notifications */
+
+#notification {
+  background-color: #E77E21  !important;
+  color: #FAD79F  !important;
+  border-bottom-left-radius: 3px !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+  border-bottom-right-radius: 3px !important;
+  box-shadow: 0 0 10px 4px rgba(119, 58, 6, 0.2) !important;
+}
+
+/* hacks */
+
+.header > div { /* remove logo on home.html page  in header */
+  display: none !important;
+}
+
+.dbg-btn {
+  margin-left: 5px !important;
+}
+
+.console-in {
+  background: rgb(247, 249, 249) !important;
+}
+
+/* status */
+
+#mqtt-state, #current-fw {
+  color: #E77E21 !important;
+}
+
+#wifi-table tr td:nth-of-type(2),
+#system-table tr td:nth-of-type(2) {
+  color: #E77E21 !important; /* table */
+  font-weight: bold !important;
+}
+
+#fw-slot {
+  color: #BF3A2B !important;
+}
