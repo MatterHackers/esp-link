@@ -94,6 +94,7 @@ uart_config(uint8 uart_no, UartBautRate baudrate, uint32 conf0)
   WRITE_PERI_REG(UART_INT_CLR(uart_no), 0xffff);
 }
 
+
 /******************************************************************************
  * FunctionName : uart1_tx_one_char
  * Description  : Internal used function
@@ -295,4 +296,3 @@ uart_add_recv_cb(UartRecv_cb cb) {
   }
   os_printf("UART: max cb count exceeded\n");
 }
-

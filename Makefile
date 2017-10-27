@@ -57,7 +57,7 @@ XTENSA_TOOLS_ROOT ?= $(abspath ../esp-open-sdk/xtensa-lx106-elf/bin)/
 # Firmware version 
 # WARNING: if you change this expect to make code adjustments elsewhere, don't expect
 # that esp-link will magically work with a different version of the SDK!!!
-SDK_VERS ?= esp_iot_sdk_v2.0.0.p1
+SDK_VERS ?= esp_iot_sdk_v2.1.0
 
 # Try to find the firmware manually extracted, e.g. after downloading from Espressif's BBS,
 # http://bbs.espressif.com/viewforum.php?f=46
@@ -163,6 +163,7 @@ else ifeq ("$(FLASH_SIZE)","2MB")
 ESP_SPI_SIZE        ?= 4       # 6->4MB (1MB+1MB) or 4->4MB (512KB+512KB)
 ESP_FLASH_MODE      ?= 0       # 0->QIO, 2->DIO
 ESP_FLASH_FREQ_DIV  ?= 15      # 15->80Mhz
+:q
 ET_FS               ?= 16m     # 16Mbit flash size in esptool flash command
 ET_FF               ?= 80m     # 80Mhz flash speed in esptool flash command
 ET_BLANK            ?= 0x1FE000 # where to flash blank.bin to erase wireless settings
@@ -189,7 +190,8 @@ endif
 TRAVIS_BRANCH?=$(shell git symbolic-ref --short HEAD --quiet)
 # Use git describe to get the latest version tag, commits since then, sha and dirty flag, this
 # results is something like "v1.2.0-13-ab6cedf-dirty"
-VERSION := $(shell (git describe --tags --match 'v*' --long --dirty || echo "no-tag") | sed -re 's/(\.0)?-/./')
+NO_TAG ?= "no-tag"
+VERSION := $(shell (git describe --tags --match 'v*.0' --long --dirty || echo $(NO_TAG)) | sed -re 's/(\.0)?-/./')
 # If not on master then insert the branch name
 ifneq ($(TRAVIS_BRANCH),master)
 ifneq ($(findstring V%,$(TRAVIS_BRANCH)),)
@@ -198,19 +200,6 @@ endif
 endif
 VERSION :=$(VERSION)
 $(info VERSION is $(VERSION))
-
-# OLD - DEPRECATED
-# This queries git to produce a version string like "esp-link v0.9.0 2015-06-01 34bc76"
-# If you don't have a proper git checkout or are on windows, then simply swap for the constant
-# Steps to release: create release on github, git pull, git describe --tags to verify you're
-# on the release tag, make release, upload esp-link.tgz into the release files
-#VERSION ?= "esp-link custom version"
-#DATE    := $(shell date '+%F %T')
-#BRANCH  ?= $(shell if git diff --quiet HEAD; then git describe --tags; \
-#                   else git symbolic-ref --short HEAD; fi)
-#SHA     := $(shell if git diff --quiet HEAD; then git rev-parse --short HEAD | cut -d"/" -f 3; \
-#                   else echo "development"; fi)
-#VERSION ?=esp-link $(BRANCH) - $(DATE) - $(SHA)
 
 # Output directors to store intermediate compiled files
 # relative to the project directory
@@ -500,8 +489,8 @@ release: all
 	$(Q) egrep -a 'esp-link [a-z0-9.]+ - 201' $(FW_BASE)/user1.bin | cut -b 1-80
 	$(Q) egrep -a 'esp-link [a-z0-9.]+ - 201' $(FW_BASE)/user2.bin | cut -b 1-80
 	$(Q) cp $(FW_BASE)/user1.bin $(FW_BASE)/user2.bin $(SDK_BASE)/bin/blank.bin \
-	       "$(SDK_BASE)/bin/boot_v1.6.bin" "$(SDK_BASE)/bin/esp_init_data_default.bin" \
-	       wiflash avrflash release/esp-link-$(VERSION)
+	       "$(SDK_BASE)/bin/boot_v1.7.bin" "$(SDK_BASE)/bin/esp_init_data_default.bin" \
+	       wiflash avrflash megaflash release/esp-link-$(VERSION)
 	$(Q) tar zcf esp-link-$(VERSION).tgz -C release esp-link-$(VERSION)
 	$(Q) echo "Release file: esp-link-$(VERSION).tgz"
 	$(Q) rm -rf release
@@ -520,3 +509,13 @@ ifeq ("$(COMPRESS_W_HTMLCOMPRESSOR)","yes")
 endif
 
 $(foreach bdir,$(BUILD_DIR),$(eval $(call compile-objects,$(bdir))))
+
+depend:
+	makedepend -p${BUILD_BASE}/ -Y -- $(INCDIR) $(MODULE_INCDIR) $(EXTRA_INCDIR) $(SDK_INCDIR) -I${XTENSA_TOOLS_ROOT}../xtensa-lx106-elf/include -I${XTENSA_TOOLS_ROOT}../lib/gcc/xtensa-lx106-elf/4.8.2/include -- */*.c
+
+# Rebuild version at least at every Makefile change
+
+${BUILD_BASE}/esp-link/main.o: Makefile
+
+# DO NOT DELETE
+
